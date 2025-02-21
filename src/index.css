@@ -1,0 +1,382 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Anton', serif;
+  /* Default: Anton for larger screens */
+}
+
+
+/* Override Bootstrap table font */
+.table,
+.table th,
+.table td {
+  font-family: 'Arial', sans-serif !important;
+}
+
+
+/* Change font for smaller screens */
+@media (max-width: 992px) {
+
+  /* Font styles for headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+
+  /* Font styles for body and paragraphs */
+  body,
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+  }
+
+  /* Table styles for better readability on small screens */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table {
+    font-size: 14px;
+    /* Smaller font size for better fit */
+  }
+
+  .table thead {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+    /* Prevents wrapping */
+  }
+
+  /* Make action buttons more accessible */
+  .table td button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+
+
+
+
+
+.available-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #001eff, #000000, #ffffff);
+  background-size: 200% 100%;
+  animation: moveShimmer 4s infinite linear;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.9s;
+}
+
+
+.available-btn:hover {
+  background-position: left;
+  transform: scale(1.05);
+}
+
+@keyframes moveShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+
+
+
+.logintoenroll {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ffffff, #0059fd, #1b0b77);
+  background-size: 200% 100%;
+  animation: moveShimmer 4s infinite linear;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+
+
+.dashboardbtn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #470fff, #040165, #4834bc);
+  background-size: 200% 100%;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+
+
+
+
+
+
+.transition-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transition-effect:hover {
+  transform: scale(1.05);
+  /* Slightly enlarge the card */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  /* Stronger shadow */
+}
+
+
+/* index.css */
+
+/* Login to Enroll Button */
+.login-to-enroll-btn {
+  background: linear-gradient(135deg, #007bff, #ff003c);
+  /* Blue-Red Gradient */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(255, 0, 60, 0.5);
+  /* Red Glow */
+  animation: slideIn 0.8s ease-out, pulseGlow 1.5s infinite alternate ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect - Shake */
+.login-to-enroll-btn:hover {
+  background: linear-gradient(135deg, #ff003c, #007bff);
+  /* Reverse Gradient */
+  animation: shake 0.3s ease-in-out;
+  box-shadow: 0px 0px 15px rgba(255, 0, 60, 0.8), 0px 0px 15px rgba(0, 123, 255, 0.8);
+  /* Dual Glow */
+}
+
+/* Click Effect */
+.login-to-enroll-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0px 0px 5px rgba(255, 0, 60, 0.6);
+}
+
+/* Slide-In Animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Pulsing Glow Animation */
+@keyframes pulseGlow {
+  from {
+    box-shadow: 0px 0px 10px rgba(255, 0, 60, 0.5);
+  }
+
+  to {
+    box-shadow: 0px 0px 20px rgba(255, 0, 60, 0.8), 0px 0px 20px rgba(0, 123, 255, 0.8);
+  }
+}
+
+/* Shake Effect */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+
+  75% {
+    transform: translateX(-3px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+/* Enroll Now Button */
+.enroll-btn {
+  background: linear-gradient(90deg, #007bff, #ff073a, #007bff);
+  background-size: 200% 100%;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: gradientMove 4s linear infinite;
+}
+
+/* Smooth Moving Gradient Animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Button Click Effect */
+.enroll-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Professional & Techy Blue Buttons */
+.custom-blue-btn {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  /* Gradient Blue */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-blue-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-blue-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Logout Button - Red */
+.custom-red-btn {
+  background: linear-gradient(90deg, #dc3545, #b22222);
+  /* Gradient Red */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-red-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-red-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Professional & Techy Blue Buttons */
+.custom-blue-btn {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  /* Gradient Blue */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-blue-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-blue-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Logout Button - Red */
+.custom-red-btn {
+  background: linear-gradient(90deg, #dc3545, #b22222);
+  /* Gradient Red */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-red-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.custom-red-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
