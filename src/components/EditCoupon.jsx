@@ -53,8 +53,7 @@ function EditCoupon({ couponData, courseId }) {
       code,
       discountAmount,
       expiryDate,
-      courseId, // Ensure only ID is sent
-    };
+      courseId: couponData.courseId || courseId,     };
 
     if (!token) {
       Swal.fire({
@@ -74,9 +73,10 @@ function EditCoupon({ couponData, courseId }) {
       };
       const id = couponData._id;
       const result = await editCouponApi(id, reqBody, reqHeader);
-      console.log(id, reqBody, reqHeader);
+      console.log(result);
 
       if (result.status === 200) {
+        setEditCouponResponse(result);
         Swal.fire({
           title: "Coupon edited successfully",
           icon: "success",
@@ -84,7 +84,6 @@ function EditCoupon({ couponData, courseId }) {
           timer: 2500, // Auto close after 2.5s
           showConfirmButton: false,
         }).then(() => {
-          setEditCouponResponse(result);
           setTimeout(() => setShow(false), 2000);
         });
       } else {

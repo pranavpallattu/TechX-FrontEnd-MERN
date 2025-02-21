@@ -42,6 +42,8 @@ function AdminCoupons() {
 
     try {
       const result = await getCouponsApi(reqHeader);
+      console.log(result);
+      
       if (result.status === 200) {
         setCoupons(result.data);
       } else {
@@ -123,7 +125,7 @@ function AdminCoupons() {
                     coupons.map((coupon) => (
                       <tr key={coupon._id} className="animate__animated animate__fadeIn">
                         <td className="p-2 text-break">{coupon.code}</td>
-                        <td className="p-2 text-break">{coupon.courseId?.title || "N/A"}</td>
+                        <td className="p-2 text-break">{coupon.courseId?.title}</td>
                         <td className="fw-bold text-success p-2">₹{coupon.discountAmount}</td>
                         <td className="p-2">{new Date(coupon.expiryDate).toLocaleDateString()}</td>
                         <td className="p-2">
