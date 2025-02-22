@@ -53,7 +53,8 @@ function EditCoupon({ couponData, courseId }) {
       code,
       discountAmount,
       expiryDate,
-      courseId: couponData.courseId || courseId,     };
+      courseId: couponData.courseId || courseId,
+    };
 
     if (!token) {
       Swal.fire({
@@ -129,10 +130,36 @@ function EditCoupon({ couponData, courseId }) {
             <div className='mb-3'>
               <input
                 type="number"
-                placeholder='Discount Amount'
+                placeholder="discountAmount"
                 value={editCoupon.discountAmount}
-                min="1"
-                onChange={(e) => setEditCoupon({ ...editCoupon, discountAmount: e.target.value })}
+                onChange={(e) => {
+                  let value = e.target.value;
+
+                  // Prevent multiple dots (e.g., "12.34.56")
+                  if (!/^\d*\.?\d*$/.test(value)) {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Invalid Input",
+                      text: "Please enter a valid number!",
+                    });
+                    return;
+                  }
+
+                  // Convert to number
+                  const numericValue = parseFloat(value);
+
+                  // Prevent negative values and zero
+                  if (numericValue < 1) {
+                    Swal.fire({
+                      icon: "warning",
+                      title: "Invalid Price",
+                      text: "Price cannot be less than 1!",
+                    });
+                    return;
+                  }
+
+                  setEditCoupon({ ...editCoupon, discountAmount: e.target.value });
+                }}
                 className='form-control'
               />
             </div>

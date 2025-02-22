@@ -204,10 +204,36 @@ function EditCourse({ course }) {
                 <input
                   type="number"
                   placeholder="Price"
-                  min="1"
                   value={editCourseDetails.price}
-                  onChange={(e) => setEditCourseDetails({ ...editCourseDetails, price: e.target.value })}
-                  className="form-control mb-3"
+                  onChange={(e) => {
+                    let value = e.target.value;
+
+                    // Prevent multiple dots (e.g., "12.34.56")
+                    if (!/^\d*\.?\d*$/.test(value)) {
+                      Swal.fire({
+                        icon: "error",
+                        title: "Invalid Input",
+                        text: "Please enter a valid number!",
+                      });
+                      return;
+                    }
+
+                    // Convert to number
+                    const numericValue = parseFloat(value);
+
+                    // Prevent negative values and zero
+                    if (numericValue < 1) {
+                      Swal.fire({
+                        icon: "warning",
+                        title: "Invalid Price",
+                        text: "Price cannot be less than 1!",
+                      });
+                      return;
+                    }
+
+                    setEditCourseDetails({ ...editCourseDetails, price: value });
+                  }}
+                  className='form-control mb-3'
                 />
                 <input
                   type="text"

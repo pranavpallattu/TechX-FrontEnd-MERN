@@ -161,14 +161,40 @@ function AddCoupons({ courseId }) {
                 />
               </div>
               <div className='mb-3'>
-                <input
-                  type="number"
-                  placeholder='Discount Amount'
-                  value={coupon.discountAmount}
-                  min="1"
-                  onChange={(e) => setCoupon({ ...coupon, discountAmount: e.target.value })}
-                  className='form-control'
-                />
+                   <input
+                                  type="number"
+                                  placeholder="discountAmount"
+                                  value={coupon.discountAmount}
+                                  onChange={(e) => {
+                                    let value = e.target.value;
+                
+                                    // Prevent multiple dots (e.g., "12.34.56")
+                                    if (!/^\d*\.?\d*$/.test(value)) {
+                                      Swal.fire({
+                                        icon: "error",
+                                        title: "Invalid Input",
+                                        text: "Please enter a valid number!",
+                                      });
+                                      return;
+                                    }
+                
+                                    // Convert to number
+                                    const numericValue = parseFloat(value);
+                
+                                    // Prevent negative values and zero
+                                    if (numericValue < 1) {
+                                      Swal.fire({
+                                        icon: "warning",
+                                        title: "Invalid Price",
+                                        text: "Price cannot be less than 1!",
+                                      });
+                                      return;
+                                    }
+                
+                                    setCoupon({ ...coupon, discountAmount: e.target.value  });
+                                  }}
+                                  className='form-control'
+                                />
               </div>
               <div className='mb-3'>
                 <input
