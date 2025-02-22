@@ -239,6 +239,7 @@ function AddCourse() {
                     type="number"
                     placeholder='Price'
                     value={courseDetails.price}
+                    min="1"
                     onChange={(e) => setCourseDetails({ ...courseDetails, price: e.target.value })}
                     className='form-control'
                   />

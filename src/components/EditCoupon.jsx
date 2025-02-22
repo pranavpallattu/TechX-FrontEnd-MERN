@@ -131,6 +131,7 @@ function EditCoupon({ couponData, courseId }) {
                 type="number"
                 placeholder='Discount Amount'
                 value={editCoupon.discountAmount}
+                min="1"
                 onChange={(e) => setEditCoupon({ ...editCoupon, discountAmount: e.target.value })}
                 className='form-control'
               />
