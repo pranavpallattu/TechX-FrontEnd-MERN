@@ -202,7 +202,7 @@ function EditCourse({ course }) {
                   className="form-control mb-3"
                 />
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Price"
                   value={editCourseDetails.price}
                   onChange={(e) => setEditCourseDetails({ ...editCourseDetails, price: e.target.value })}

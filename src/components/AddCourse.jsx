@@ -108,6 +108,7 @@ function AddCourse() {
         const result = await addCourseApi(reqBody, reqHeader);
 
         if (result.status === 200) {
+          handleClose()
           Swal.fire({
             title: "Success!",
             text: "Course added successfully.",
@@ -115,7 +116,7 @@ function AddCourse() {
             position: "center",
             timer: 2500,
             showConfirmButton: false,
-          }).then(() => handleClose());
+          })
 
           setAddCourseResponse(result);
         } else {
