@@ -106,6 +106,8 @@ function AddCourse() {
 
       try {
         const result = await addCourseApi(reqBody, reqHeader);
+        console.log(result);
+        
 
         if (result.status === 200) {
           handleClose()
@@ -118,8 +120,17 @@ function AddCourse() {
             showConfirmButton: false,
           })
 
-          setAddCourseResponse(result);
-        } else {
+          const { coverImageUrl, introVideoUrl } = result.data;
+          console.log(coverImageUrl,introVideoUrl);
+          
+
+          // Update preview with Cloudinary URL
+          setPreviewImage(coverImageUrl);
+          setPreviewVideo(introVideoUrl);
+
+          setAddCourseResponse(result);  
+              }
+               else {
           Swal.fire({
             title: result.status === 406 ? "Error!" : "Something went wrong",
             text: result.response?.data || "Please try again.",

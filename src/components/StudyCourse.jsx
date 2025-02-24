@@ -118,7 +118,7 @@ function StudyCourse() {
                     <div className="ratio ratio-16x9">
                       <video
                         controls
-                        src={`${serverUrl}/${lecture.lectureVideo}`}
+                        src={lecture.lectureVideo}
                         className="w-100 rounded"
                         onError={(e) =>
                           console.error("Video failed to load:", e.target.src)

@@ -65,7 +65,7 @@ function EnrolledCourse({ course }) {
           <Card style={{ width: '100%' }} key={course._id}>
             <Card.Img
               variant="top"
-              src={`${serverUrl}/uploads/${course.coverImage}`} // No need to prepend "upload" here
+              src={course.coverImage} // No need to prepend "upload" here
               alt={course.title}
               style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '5px' }}
               onError={(e) => {

@@ -6,7 +6,6 @@ import { serverUrl } from '../services/serverUrl';
 import { editCourseContext } from '../context/ContextApi';
 import Swal from "sweetalert2";
 
-
 function EditCourse({ course }) {
   const [editCourseDetails, setEditCourseDetails] = useState({
     title: "",
@@ -15,8 +14,8 @@ function EditCourse({ course }) {
     skill: "",
     duration: "",
     description: "",
-    coverImage: "",
-    introVideo: "",
+    coverImage: null,
+    introVideo: null,
   });
 
   const [previewImage, setPreviewImage] = useState("");
@@ -24,7 +23,6 @@ function EditCourse({ course }) {
   const [token, setToken] = useState("");
   const [show, setShow] = useState(false);
   const [animateClass, setAnimateClass] = useState('animate__fadeIn'); // Default animation
-
 
   const { setEditCourseResponse } = useContext(editCourseContext);
 
@@ -42,14 +40,15 @@ function EditCourse({ course }) {
         introVideo: course.introVideo,
       });
 
-      setPreviewImage(`${serverUrl}/uploads/${course.coverImage}`);
-      setPreviewVideo(`${serverUrl}/uploads/${course.introVideo}`);
+      setPreviewImage(course.coverImage);
+      setPreviewVideo(course.introVideo);
     }
   }, [show, course]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      setToken(sessionStorage.getItem("token"));
+    const storedToken = sessionStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
     }
   }, []);
 
@@ -68,12 +67,12 @@ function EditCourse({ course }) {
   };
 
   const handleCancel = () => {
-    handleClose()
+    handleClose();
   };
 
   const handleUpdate = async () => {
     const { title, instructor, price, skill, duration, description, coverImage, introVideo } = editCourseDetails;
-
+  
     if (!title || !instructor || !price || !skill || !duration || !description) {
       Swal.fire({
         title: "Please fill out all fields.",
@@ -84,7 +83,7 @@ function EditCourse({ course }) {
       });
       return;
     }
-
+  
     const reqBody = new FormData();
     reqBody.append("title", title);
     reqBody.append("instructor", instructor);
@@ -92,18 +91,19 @@ function EditCourse({ course }) {
     reqBody.append("skill", skill);
     reqBody.append("duration", duration);
     reqBody.append("description", description);
-    coverImage instanceof File ? reqBody.append("coverImage", coverImage) : reqBody.append("coverImage", course.coverImage);
-    introVideo instanceof File ? reqBody.append("introVideo", introVideo) : reqBody.append("introVideo", course.introVideo);
-
+    previewImage ? reqBody.append("coverImage", coverImage) : reqBody.append("coverImage", course.coverImage);
+    previewVideo ? reqBody.append("introVideo", introVideo) : reqBody.append("introVideo", course.introVideo);
+  
     if (token) {
       const reqHeader = {
         "Content-Type": "multipart/form-data",
         "Authorization": `Bearer ${token}`,
       };
-
+  
       const id = course._id;
       const result = await editCourseApi(id, reqBody, reqHeader);
-
+      console.log(result);
+      
       if (result.status === 200) {
         Swal.fire({
           title: "Course updated successfully!",
@@ -112,9 +112,11 @@ function EditCourse({ course }) {
           timer: 2500, // Auto close after 2.5s
           showConfirmButton: false,
         }).then(() => {
-          setEditCourseResponse(result);
-          handleClose()
-
+          setEditCourseResponse(result); // Pass the updated result
+          // Update state with the new image and video URLs
+          setPreviewImage(result.data.updatedCourse.coverImage || previewImage); // Use new URL or fallback to the old one
+          setPreviewVideo(result.data.updatedCourse.introVideo || previewVideo); // Use new URL or fallback to the old one
+          handleClose();
         });
       } else {
         Swal.fire({
@@ -135,22 +137,21 @@ function EditCourse({ course }) {
       });
     }
   };
+  
 
   // Function to open modal with fade-in
   const handleShow = () => {
-    setAnimateClass('animate__fadeIn'); // Set opening animation
+    setAnimateClass('animate__fadeIn');
     setShow(true);
   };
 
   // Function to close modal with fade-out
   const handleClose = () => {
-    setAnimateClass('animate__fadeOut'); // Set closing animation
+    setAnimateClass('animate__fadeOut');
     setTimeout(() => {
-      setShow(false); // Hide modal after animation
-    }, 500); // Bootstrap modal default animation time
+      setShow(false);
+    }, 500);
   };
-
-
 
   return (
     <>
@@ -161,11 +162,9 @@ function EditCourse({ course }) {
       <Modal
         show={show}
         onHide={handleClose}
-        dialogClassName={`animate__animated ${animateClass}`} // Apply dynamic animation class
+        dialogClassName={`animate__animated ${animateClass}`}
         className="modal-lg"
       >
-
-
         <Modal.Header closeButton>
           <Modal.Title>Edit Course</Modal.Title>
         </Modal.Header>
@@ -275,7 +274,6 @@ function EditCourse({ course }) {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </>
   );
 }

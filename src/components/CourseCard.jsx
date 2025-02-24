@@ -136,7 +136,7 @@ function CourseCard({ page, course, loginResponse }) {
           <Card.Img
             height={'300px'}
             variant="top"
-            src={`${serverUrl}/uploads/${course.coverImage}`}
+            src={course.coverImage}
             style={{ objectFit: "cover" }}
             className="animate__animated animate__fadeIn"
           />
@@ -146,7 +146,7 @@ function CourseCard({ page, course, loginResponse }) {
             controlsList="nodownload"
             style={{ display: "block", margin: "0 auto", maxWidth: "100%", borderRadius: "10px" }}
             className="animate__animated animate__fadeIn"
-            src={`${serverUrl}/uploads/${course.introVideo}`}
+            src={course.introVideo}
           ></video>
         )}
 
